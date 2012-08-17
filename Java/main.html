@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}" />
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.ico'}" />
+        <script src="@{'/public/javascripts/jquery-1.4.min.js'}" type="text/javascript" charset="utf-8"></script>
+        <!--[if IE]><script language="javascript" type="text/javascript" src="@{'/public/javascripts/excanvas.min.js'}"></script><![endif]-->
+        <script language="javascript" type="text/javascript" src="@{'/public/javascripts/jquery.js'}"></script>
+        <script language="javascript" type="text/javascript" src="@{'/public/javascripts/jquery.flot.js'}"></script>
+        #{get 'moreScripts' /}
+    </head>
+    <body>
+
+        <div id="container">
+            <div id="header">
+                <div id="logo">
+                </div>
+                #{if connected}
+                <div id="ingelogd">
+                    <p>
+                        ${connected.naam} is ingelogd. <a href="@{Application.logout}">Uitloggen</a>
+                    </p>
+                    <span>
+                        Je hebt
+                        <a href="@{Application.dashboard()}" >
+                            #{if counter > 1}
+                        ${counter}</a> nieuwe berichten.
+                        #{/if}
+                        #{if counter == 1}
+                        ${counter}</a> nieuw bericht.
+                        #{/if}
+                        #{ifnot counter > 0}
+                        geen</a> nieuwe berichten.
+                        #{/ifnot}
+                    </span>
+                </div>
+                #{/if}
+                #{else}
+                <div id="login">
+                    <br />
+                    <form action="@{Application.authenticateOpenID()}" method="post">
+                        <!--    <tr><td><label for="user">OpenID:</label></td><td>
+    <input type="text" name="user" id="user" /></td>
+    <td><input type="submit" value="login" /></td></tr>-->
+                        <table>
+                            <tr>
+                                <td></td>
+                                <td><input style="float:right" type="submit" value="Inloggen met openID" id="loginButton" /></td>
+                            </tr>
+                        </table>
+                    </form>
+                    #{if flash.notconfirmed}
+                    <p>
+                        <a class="action" href="@{Application.resendConfirmation(flash.notconfirmed)}">Stuur nog een bevestigingsmail</a>
+                    </p>
+                    #{/if}
+                </div>
+                #{/else}
+                <div id="menuTop">
+                    <ul>
+                        <li class="first"><a href="/home">Home</a></li>
+                        <li class="bull">&bull;</li>
+                        <li><a href="/indexen">Indexen</a></li>
+                        <li class="bull">&bull;</li>
+                        #{if connected}
+                        <li><a href="@{Application.dashboard()}">Dashboard</a></li>
+                        <li class="bull">&bull;</li>
+                        <li><a href="@{Gebruikers.show(connected.id)}">Portefeuilles</a></li>
+                        #{/if}
+                        #{else}
+                        <li><a href="/tutorial">Tutorial</a></li>
+                        <li class="bull">&bull;</li>
+                        <li><a href="/openid">OpenID</a></li>
+                        #{/else}
+                    </ul>
+                </div>
+            </div>
+            #{if flash?.error}
+            <div class="error">${flash.error}</div>
+            #{/if}
+
+            #{if flash?.success}
+            <div class="success">${flash.success}</div>
+            #{/if}
+            <div id="left">
+
+            </div>
+            <div id="body">
+                #{doLayout /}
+            </div>
+            <div id="footer">
+                <ul>
+                    <li><a href="@{Application.overhenk()}">| Over Henk |</a></li>
+                    <li><a href="@{Application.contact()}">Contact |</a></li>
+                    <li><a href="@{Application.privacy()}">Privacy |</a></li>
+                </ul>
+                <p>&copy; Projectgroep H.E.N.K. - 2009 - 2010 - All rights reserved.</p>
+
+
+            </div>
+        </div>
+    </body>
+</html>

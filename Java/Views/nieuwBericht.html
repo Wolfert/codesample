@@ -1,0 +1,45 @@
+<h2>Nieuw bericht</h2>
+<div class="standardForm">
+    <table class="standardTable" cellspacing="12">
+        <tr>
+            <td>
+                Aan:
+            </td>
+            <td>
+                <input type="text" name="receiverInt" id="receiverInt">
+                <span id="receiverError" class="error">#{error 'receiverInt' /}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Onderwerp:
+            </td>
+            <td>
+                <input type="text" name="title" id="title">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Bericht:
+            </td>
+            <td>
+                <textarea value="content" name="content" id="berichtenContent" rows="10" cols="66"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><div style="color:red;" id="message"></div></td>
+        </tr>
+    </table>
+    <span style="margin-left:275px;"><input type="submit" class="standardButton" value="Versturen" id="verstuurButton"></span>
+</div>
+
+
+
+<script type="text/javascript" charset="utf-8">
+    $('#verstuurButton').live('click', function() {
+        $.post("@{Berichten.berichtSturen()}", {receiverInt: $("#receiverInt").val(), title: $("#title").val(), content: $("#berichtenContent").val()}, function(data){
+            $('#message').html("<div class='message'>"+data+"</div>");
+        })
+    });
+</script>

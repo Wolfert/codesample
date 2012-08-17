@@ -1,0 +1,50 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                                   Application.home
+
+# Registratie
+GET 		/login								Application.index
+POST		/login								Application.authenticate
+GET 		/loguit								Application.logout
+
+GET         /home								Application.home
+GET         /indexen							Application.indexen
+GET         /dashboard							Application.dashboard
+GET         /openid                             Application.openid
+GET         /tutorial                           Application.tutorial
+GET         /instellingen						Application.instellingen
+GET         /contact							Application.contact
+POST        /contact							Application.postContact
+GET         /captcha							Application.captcha
+
+# Create Parser
+GET         /staptwee/{<[0-9]+>id}              CreateParser.stapTwee
+
+# Gebruikers
+GET         /gebruikers/{<[0-9]+>id}			Gebruikers.show
+
+# Berichten
+GET         /inbox                              Berichten.inbox
+GET         /outbox                             Berichten.outbox
+GET         /nieuwBericht                       Berichten.nieuwBericht
+GET         /inbox/bericht/{<[0-9]+>id}         Berichten.bericht
+GET         /outbox/bericht/{<[0-9]+>id}        Berichten.bericht
+POST        /berichtSturen                      Berichten.berichtSturen
+GET         /deleteBericht/{<[0-9]+>id}         Berichten.deleteBericht
+
+# Portefeuilles
+GET         /portefeuilles/{<[0-9]+>id}         Portefeuilles.show
+
+
+# Map static resources from the /app/public folder to the /public path
+GET         /public/                            staticDir:public
+
+# Catch all
+*           /{controller}/{action}              {controller}.{action}
+
+
+
+

@@ -1,0 +1,41 @@
+
+<div id="berichten-content">
+</div>
+
+<div id="berichten-menu">
+	<div class="dashboard-item">
+		<img src="@{'public/images/icons/inbox.png'}" name="Inbox" id="inboxicon" />
+		<p>Inbox</p>
+	</div>
+	<div class="dashboard-item">
+		<img src="@{'public/images/icons/verzonden.png'}" name="Verzonden" id="verzondenicon" />
+		<p>Outbox</p>
+	</div>		
+	<div class="dashboard-item">
+		<img src="@{'public/images/icons/nieuwbericht.png'}" name="Nieuw" id="nieuwicon" />
+		<p>Nieuw Bericht</p>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+	   $("#berichten-content").load('@{Berichten.inbox()}', function() {			
+		});
+	 });
+	
+
+	$('#inboxicon').live('click', function() {
+		$("#berichten-content").load('@{Berichten.inbox()}', function() {			
+		});
+	})
+	
+	$('#verzondenicon').live('click', function() {
+		$("#berichten-content").load('@{Berichten.outbox()}', function() {			
+		});
+	})
+	
+	$('#nieuwicon').live('click', function() {
+		$("#berichten-content").load('@{Berichten.nieuwBericht()}', function() {			
+		});
+	})
+</script>

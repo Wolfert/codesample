@@ -1,0 +1,20 @@
+#{selenium 'selenium test 1.0'}
+
+//bericht versturen
+clearSession()
+open('/')
+clickAndWait('loginButton')
+assertNotTitle('Home')
+open('/dashboard')
+waitForElementPresent('id=nieuwicon')
+click('id=nieuwicon')
+waitForElementPresent('id=receiverInt')
+type('receiverInt', '2')
+type('title', 'Selenium Test')
+type('//textarea[@name="content"]', 'Dit is een selenium test')
+click('verstuurButton')
+assertText('id=message', 'Bericht is verzonden')
+verifyText('id=receiverError', '')
+assertNotTitle('Application error')
+
+#{/selenium}

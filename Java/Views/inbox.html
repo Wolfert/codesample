@@ -1,0 +1,42 @@
+<h2>Inbox</h2>
+<div id="inbox">
+    <div id="upperline">
+        <b>
+            <div id="upperoption">datum:</div>
+            <div id="upperoption">van:</div>
+            <div id="upperoption">onderwerp:</div>
+        </b>
+    </div>
+    #{ifnot berichten}
+    <span>U heeft geen binnengekomen berichten.</span>
+    #{/ifnot}
+    #{if berichten}
+    <div id="berichten"><hr>
+        #{list items:berichten, as:'msg'}
+        #{if !msg.deletedReceipient}
+        <div id="berichtlijn">
+            #{if !msg.isRead}
+            <img src="@{'/public/images/icons/envelope3.png'}" style="float:left;">
+            #{/if}
+            #{else}
+            <img src="@{'/public/images/icons/envelope.png'}" style="float:left;">
+            #{/else}
+            &nbsp;
+            <div id="datum"> <a class="datum" href="/inbox/bericht/${msg.id}" style="margin-left:5px;">${msg.date}</a></div>
+            #{if !msg.isRead}
+            <b>
+                ${msg.Sender} &nbsp; &nbsp;
+                ${msg.title}
+            </b>
+            #{/if}
+            #{else}
+            ${msg.Sender} &nbsp; &nbsp;
+            ${msg.title}
+            #{/else}
+            <a href="/deleteBericht/${msg.id}"  ><img border="0" src="@{'/public/images/icons/delete2.png'}" style="float:right;" alt="delete"></a>
+        </div>
+        #{/if}
+        #{/list}
+    </div>
+    #{/if}
+</div>

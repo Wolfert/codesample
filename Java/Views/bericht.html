@@ -1,0 +1,32 @@
+#{extends 'main.html' /}
+#{set 'menu'}
+<li>
+    <a href="/inbox">Inbox</a>
+</li>
+<li>
+    <a href="/outbox">Outbox</a>
+</li>
+<li>
+    <a href="/nieuwBericht">Nieuw bericht</a>
+</li>
+#{/set}
+<form action="/berichtSturen" method="POST">
+    <div id="inbox">
+    <table>
+    <tr>
+        <td>
+            Van: ${b.Receiver}
+        </td>
+            <tr>
+                <td>
+           Titel: ${b.title}
+        </td>
+    </tr>
+                <tr>
+                <td>
+           Content: ${b.content}
+        </td>
+    </tr>
+    </table>
+    </div>
+</form>
